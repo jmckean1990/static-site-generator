@@ -66,6 +66,11 @@ class ParentNode(HTMLNode):
             
         super().__init__(tag, None, children, props)
 
+    def generate_html(tag, text=None):
+        return f"<{tag}>text</{tag}>"
+    
     def to_html(self):
         pass
+
+    
     
