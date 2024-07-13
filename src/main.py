@@ -1,5 +1,5 @@
 from textnode import TextNode
-from htmlnode import HTMLNode, LeafNode
+from htmlnode import HTMLNode, LeafNode, ParentNode
 
 def main():
     # text_node1 = TextNode("This is a text node", "bold", "https://www.boot.dev")
@@ -15,11 +15,19 @@ def main():
     # print(html_node1.props_to_html())
     # print(leaf_node.to_html())
     html_node1 = HTMLNode("p", "Hello World", [], {"color":"red", "text-size":"5em"})
-    print(html_node1.props_to_html())
-    print(get_html("b", "Hello world"))
-
-def get_html(tag, text=None):
-        return f"<{tag}>text</{tag}>"
+    node = ParentNode(
+        "p",
+        [
+            LeafNode("b", "Bold text"),
+            ParentNode("div", [LeafNode("p", "lorem ipsum"), LeafNode(None, "Some text in this inner div"), ParentNode("div", [LeafNode("p", "lorem ipsum2"), LeafNode("p", "lorem ipsum3")], {"prop-val":"val"})]),
+            LeafNode(None, "Normal text"),
+            LeafNode("i", "italic text", {"font-size":"3em"}),
+            LeafNode(None, "Normal text"),
+        ],
+        {"color":"red", "text-size":"5em"}
+    )
+    # print(node.to_html())
+    print(node)
 
 
 if __name__ == "__main__":

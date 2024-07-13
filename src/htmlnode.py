@@ -66,11 +66,14 @@ class ParentNode(HTMLNode):
             
         super().__init__(tag, None, children, props)
 
-    def generate_html(tag, text=None):
-        return f"<{tag}>text</{tag}>"
-    
     def to_html(self):
-        pass
+        html = f"<{self.tag}{self.props_to_html() if self.props else ''}>"
+        for child in self.children:
+            html += child.to_html()
+        return html + f"</{self.tag}>"
+    
+    def __repr__(self):
+        return f"ParentNode(tag:{self.tag}, children:{self.children}, props:{self.props})"
 
     
     
